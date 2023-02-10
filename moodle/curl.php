@@ -559,7 +559,7 @@ class curl_cache {
      */
     public function get($param){
         $this->cleanup($this->ttl);
-        $filename = 'u_'.md5(serialize($param));
+        $filename = 'u_'.hash(serialize($param));
         if(file_exists($this->dir.$filename)) {
             $lasttime = filemtime($this->dir.$filename);
             if(time()-$lasttime > $this->ttl)
