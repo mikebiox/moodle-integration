@@ -569,7 +569,7 @@ class curl_cache {
                 $fp = fopen($this->dir.$filename, 'r');
                 $size = filesize($this->dir.$filename);
                 $content = fread($fp, $size);
-                return unserialize($content);
+                return json_decode($content);
             }
         }
         return false;
@@ -582,7 +582,7 @@ class curl_cache {
      * @param mixed $val
      */
     public function set($param, $val){
-        $filename = 'u_'.md5(serialize($param));
+        $filename = 'u_'.hash(serialize($param));
         $fp = fopen($this->dir.$filename, 'w');
         fwrite($fp, serialize($val));
         fclose($fp);
